@@ -1,0 +1,24 @@
+<form data-id="<%= book.id%>" class="myForm">
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Название</label>
+        <input value="<%= book.title %>" name="title" type="text" class="form-control" id="exampleInputEmail1">
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Автор</label>
+        <input value="<%= book.authors %>" name="authors" type="text" class="form-control" id="exampleInputPassword1">
+    </div>
+    <div class="mb-3">
+        <label for="textArea" class="form-label">Описание</label>
+        <textarea name="description" class="form-control" id="textArea" aria-label="With textarea"><%= book.description %></textarea>
+    </div>
+    <div class="mb-3 form-check">
+        <input checked="<%= book.favorite %>" name="favorite" type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Добавить в избранное</label>
+    </div>
+    <button
+            type="submit"
+            class="btn btn-primary"
+    >
+        <%=btn%>
+    </button>
+</form>

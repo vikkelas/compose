@@ -1,0 +1,34 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.myForm{
+    width: 700px;
+}
+.list{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px 10px;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.listItem{
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgba(202, 255, 234, 0.56);
+    display: grid;
+    grid-template-columns: 35% 35% 30%;
+    align-items: center;
+}
+
+.listItem span{
+    font-size: 18px;
+}
+.buttons{
+    display: flex;
+    gap: 5px;
+    justify-content: flex-end;
+}
