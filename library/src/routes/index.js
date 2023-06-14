@@ -13,7 +13,7 @@ router.get('/', (req, res)=>{
 router.get('/book/:id',async (req, res)=>{
     const {id} = req.params;
     const book = store.find(i=>i.id===id);
-    console.log(process.env.URL_COUNTER)
+
     const response =  await fetch(`${process.env.COUNTER_URL}/counter/${id}`,{
         method: 'GET',
         mode: 'cors',
@@ -23,7 +23,6 @@ router.get('/book/:id',async (req, res)=>{
     await fetch(`${process.env.COUNTER_URL}/counter/${id}`,{
         method: 'POST',
     })
-    console.log(response);
 
     res.render("view", {
         title: book.title,

@@ -6,7 +6,6 @@ const formidableMiddleware = require('express-formidable');
 
 const indexRouter = require('./src/routes')
 
-
 app.use(express.urlencoded());
 app.use(formidableMiddleware());
 app.set('views', path.join(__dirname, './src/views'));

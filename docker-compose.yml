@@ -1,9 +1,11 @@
 services:
   counter:
-    image: counter
+    image: count
     container_name: counter
     networks:
       - my-networks
+    ports:
+      - 5001:5001
     environment:
       - PORT_COUNTER=5001
   library:
@@ -15,10 +17,11 @@ services:
       - 80:3001
     environment:
       - PORT=3001
-      - COUNTER_URL=counter
+      - COUNTER_URL=http://counter:5001
     depends_on:
       - counter
 networks:
   my-networks:
     name: my-networks
     driver: bridge
+
