@@ -1,70 +1,89 @@
 const express = require('express');
 const router = express.Router();
-const Book = require('../model/book');
-const store = require('../store')
+const Book = require('../models/book');
 
-router.get('/', (req, res)=>{
-    res.render("index",{
-        title: 'Главная',
-        books: store
-    })
+
+router.get('/', async (req, res)=>{
+    try{
+        const books = await Book.find()
+        res.render("index",{
+            title: 'Главная',
+            books
+        })
+    }catch (err){
+        res.status(500).json(err);
+    }
 })
 
 router.get('/book/:id',async (req, res)=>{
-    const {id} = req.params;
-    const book = store.find(i=>i.id===id);
-
-    const response =  await fetch(`${process.env.COUNTER_URL}/counter/${id}`,{
-        method: 'GET',
-        mode: 'cors',
-        headers: { 'Content-Type': 'application/json' }
-    })
-        .then(r => r.json())
-    await fetch(`${process.env.COUNTER_URL}/counter/${id}`,{
-        method: 'POST',
-    })
-
-    res.render("view", {
-        title: book.title,
-        count: response.count,
-        book
-    })
+    try{
+        const {id} = req.params;
+        const book = await Book.findById(id).select('-__v');
+        const response = await fetch(`${process.env.COUNTER_URL}/counter/${id}`,{
+            method: 'GET',
+            mode: 'cors',
+            headers: { 'Content-Type': 'application/json' }
+        })
+            .then(r => r.json())
+        await fetch(`${process.env.COUNTER_URL}/counter/${id}`,{
+            method: 'POST',
+        })
+        res.render("view", {
+            title: book.title,
+            count: response.count,
+            book
+        })
+    }catch (err){
+        res.status(500).json(err);
+    }
 })
 
-router.post('/',(req, res)=>{
+router.post('/',async (req, res)=>{
     const {title, authors, description, favorite} = req.fields
-    const book = new Book(title, description, authors, !!favorite)
-    store.push(book);
-    res.redirect('/')
-})
 
-router.get('/update/:id', (req, res)=>{
-    const {id} = req.params;
-    const book = store.find(i=>i.id===id);
-    if(!book){
-        res.redirect('/404')
-    }
-    res.render("update", {
-        title: 'Изменить',
-        btn: 'Изменить',
-        book
+    const newBook = new Book({
+        title,
+        description,
+        authors,
+        favorite: !!favorite
     })
+    try{
+        await newBook.save();
+        res.redirect('/')
+    }catch (err){
+        res.status(500).json(err);
+    }
 })
 
-router.put('/update/:id', (req, res)=> {
-    const {id} = req.params;
-    const book = store.findIndex(i=>i.id===id);
-    if(book===-1){
-        res.redirect('/404')
-    }
-    const changeObj = req.fields
-    for (let key in changeObj){
-        if(key==='favorite'){
-            store[book]["favorite"]=!!changeObj.favorite
+router.get('/update/:id', async (req, res)=>{
+    try {
+        const {id} = req.params;
+        const book = await Book.findById(id).select('-__v');
+        if(!book){
+            res.redirect('/404')
         }
-        store[book][key]=changeObj[key]
+        res.render("update", {
+            title: 'Изменить',
+            btn: 'Изменить',
+            book
+        })
+    }catch (err){
+        res.status(500).json(err);
     }
-    res.redirect(`/book/${id}`)
+})
+
+router.put('/update/:id', async (req, res)=> {
+    try {
+        const {id} = req.params;
+        const changeObj = req.fields
+        const book = await Book.findByIdAndUpdate(id, {...changeObj, favorite: !!changeObj.favorite}).select('-__v');
+        if(!book){
+            res.redirect('/404')
+        }
+        res.redirect(`/book/${id}`)
+    } catch (err){
+        res.status(500).json(err);
+    }
 })
 
 router.get('/new',(req, res)=>{
@@ -75,14 +94,14 @@ router.get('/new',(req, res)=>{
     })
 })
 
-router.get('/delete/:id',(req, res)=>{
-    const {id} = req.params;
-    const book = store.findIndex(i=>i.id===id);
-    if(book===-1){
-        res.redirect('/404')
+router.get('/delete/:id',async (req, res)=>{
+    try{
+        const {id} = req.params;
+        await Book.deleteOne({_id: id})
+        res.redirect(`/`)
+    }catch (err){
+        res.status(500).json(err);
     }
-    store.splice(book,1)
-    res.redirect(`/`)
 })
 
 module.exports = router;

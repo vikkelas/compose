@@ -5,12 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3caed874-cc5e-4223-b121-383851f4c8b7" name="Changes" comment="delete ide">
+      <change afterPath="$PROJECT_DIR$/library/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/library/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/library/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/library/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/library/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/library/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/library/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/library/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/library/public/js/submit.js" beforeDir="false" afterPath="$PROJECT_DIR$/library/public/js/submit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/library/src/model/book.js" beforeDir="false" afterPath="$PROJECT_DIR$/library/src/models/book.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/library/src/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/library/src/routes/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/library/src/store.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/library/src/views/form.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/library/src/views/form.ejs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +31,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -60,6 +70,7 @@
       <recent name="C:\Users\latys\WebstormProjects\node-ejs" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\latys\WebstormProjects\compose\library" />
       <recent name="C:\Users\latys\WebstormProjects\node-ejs\counter\data" />
       <recent name="C:\Users\latys\WebstormProjects\node-ejs\library" />
       <recent name="C:\Users\latys\WebstormProjects\node-ejs\src" />
@@ -95,7 +106,7 @@
       <workItem from="1685989034415" duration="10896000" />
       <workItem from="1686342857868" duration="4000" />
       <workItem from="1686420265986" duration="33697000" />
-      <workItem from="1686732035391" duration="8801000" />
+      <workItem from="1686732035391" duration="25477000" />
     </task>
     <task id="LOCAL-00001" summary="delete ide">
       <created>1685989108835</created>
