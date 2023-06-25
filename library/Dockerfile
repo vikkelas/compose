@@ -3,7 +3,5 @@ WORKDIR /app
 
 COPY ./package*.json ./
 RUN npm install
-COPY index.js ./
-COPY src src/
-COPY public public/
+COPY . .
 CMD ["npm", "run", "dev"]

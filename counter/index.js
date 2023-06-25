@@ -1,14 +1,27 @@
 const express = require('express');
+const fs = require('fs');
 const app = express();
-const storage = require('./data/storage');
-const BookStore = require('./BookStore');
+let storage = require('./data/storage');
 
+
+app.get('/counter/:id', (req, res, next)=>{
+    fs.readFile('./data/data.json', 'utf8', (err, data)=>{
+        if(!err&&data&&storage.length===0){
+            storage=JSON.parse(data)
+            next()
+        }
+        next()
+    })
+})
 app.get('/counter/:id', (req, res)=>{
     const {id} = req.params;
     const book = storage.find(i=>i.bookId===id);
     if(!book){
-        const newBook = new BookStore(id);
-        storage.push(newBook)
+        const newBook = {bookId: id, count: 0};
+        storage.push(newBook);
+        fs.writeFile("./data/data.json", JSON.stringify(storage), (err)=>{
+            console.log(err)
+        });
         return res.status(200).json({count: newBook.count});
     }
     return res.status(200).json({count: book.count});
@@ -17,10 +30,12 @@ app.get('/counter/:id', (req, res)=>{
 app.post('/counter/:bookId', (req, res)=>{
     const {bookId} = req.params;
     const book = storage.find(i=>i.bookId===bookId);
-    book.incCount();
+    book.count++;
+    fs.writeFile("./data/data.json", JSON.stringify(storage), (err)=>{
+        console.log(err)
+    });
     return res.sendStatus(200);
 });
-
 
 const PORT = process.env.PORT_COUNTER || 5000;
 app.listen(PORT);

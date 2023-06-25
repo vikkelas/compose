@@ -1,15 +1,19 @@
 services:
   counter:
-    image: count
+    build:
+      context: counter
+      dockerfile: Dockerfile
     container_name: counter
     networks:
       - my-networks
     ports:
       - 5001:5001
+    volumes:
+      - ./counter/data/:/app/data/
     environment:
       - PORT_COUNTER=5001
   library:
-    image: lib
+    image: vikkelas/library
     container_name: library
     networks:
       - my-networks

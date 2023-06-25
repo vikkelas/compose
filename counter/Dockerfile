@@ -3,8 +3,6 @@ WORKDIR /app
 
 COPY ./package*.json ./
 RUN npm install
-COPY index.js ./
-COPY BookStore.js ./
-COPY data data/
-VOLUME %cd%:/data:/data
+COPY . .
+#можно переключить на start и не будет работать nodemone  при записи файла  -  оставлено для демонстрации точо что при перезагрузке севрера и контейнера все рабоатет
 CMD ["npm", "run", "dev"]
